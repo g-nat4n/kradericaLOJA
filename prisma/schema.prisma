@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -109,8 +109,8 @@ model Category {
   id          String    @id @default(cuid())
   name        String
   slug        String    @unique
-  description String?
-  imageUrl    String?
+  description String?   @db.Text
+  imageUrl    String?   @db.VarChar(500)
   active      Boolean   @default(true)
   sortOrder   Int       @default(0)
   products    Product[]
@@ -122,8 +122,8 @@ model Look {
   id          String    @id @default(cuid())
   name        String
   slug        String    @unique
-  description String?
-  imageUrl    String?
+  description String?   @db.Text
+  imageUrl    String?   @db.VarChar(500)
   products    Product[]
 }
 
@@ -131,8 +131,8 @@ model Product {
   id           String           @id @default(cuid())
   name         String
   slug         String           @unique
-  description  String
-  story        String?
+  description  String           @db.Text
+  story        String?          @db.Text
   brand        String
   size         String
   color        String
@@ -163,9 +163,9 @@ model ProductImage {
   id         String    @id @default(cuid())
   productId  String
   product    Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
-  url        String
+  url        String    @db.VarChar(500)
   publicId   String?
-  alt        String
+  alt        String    @db.VarChar(500)
   kind       ImageKind @default(FRONT)
   sortOrder  Int       @default(0)
 }
@@ -212,7 +212,7 @@ model Order {
   couponCode      String?
   /// Sobe quando o link do e-mail é aberto. O token antigo deixa de valer.
   accessVersion   Int         @default(0)
-  notes           String?
+  notes           String?       @db.Text
   items           OrderItem[]
   payment         Payment?
   createdAt       DateTime    @default(now())
@@ -234,7 +234,7 @@ model OrderItem {
   size        String
   quantity    Int
   priceCents  Int
-  imageUrl    String?
+  imageUrl    String? @db.VarChar(500)
 }
 
 model Payment {
@@ -264,7 +264,7 @@ model ContactMessage {
   name      String
   email     String
   whatsapp  String?
-  message   String
+  message   String   @db.Text
   createdAt DateTime @default(now())
 }
 
@@ -272,7 +272,7 @@ model Testimonial {
   id        String  @id @default(cuid())
   author    String
   role      String?
-  quote     String
+  quote     String  @db.Text
   featured  Boolean @default(true)
   sortOrder Int     @default(0)
 }

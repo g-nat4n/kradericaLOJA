@@ -14,3 +14,9 @@ next-env.d.ts
 public/uploads/*
 !public/uploads/.gitkeep
 .env*
+
+.deploy-cpanel.env
+
+deploy-upload.zip
+.deploy-cpanel.env
+
