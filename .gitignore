@@ -1,22 +1,53 @@
-node_modules
-.next
-out
-dist
-tsconfig.tsbuildinfo
-coverage
+# Secrets / ambiente
+.env
+.env.*
+!.env.example
+.deploy-*.env
+
+# Sistema
 .DS_Store
 *.log
-.env
-.env.local
-.env.*.local
-.vercel
-next-env.d.ts
-public/uploads/*
-!public/uploads/.gitkeep
-.env*
+Thumbs.db
 
-.deploy-cpanel.env
-
+# Artefatos antigos / Node (não usados neste repo WP)
+node_modules/
+.next/
+.vercel/
+dist/
+out/
+*.tsbuildinfo
+next-build.*
 deploy-upload.zip
-.deploy-cpanel.env
+deploy-upload-*.zip
+vesta-*.zip
+kra-de-rica-*.zip
 
+# Staging / patches one-shot (não versionar)
+_patch*_stage/
+_deploy_stage/
+_deploy_tmp/
+_mp_extract/
+_mp_extract/**
+woocommerce-mercadopago.zip
+_vesta_*
+_patch*
+_htaccess*
+_ftp_*
+_diag_*
+_act_*
+_fix_*
+_seed_*
+_setup_*
+_shop_*
+_open_*
+_probe_*
+_put_*
+_upload_*
+_finalize*
+_find_*
+_icon*
+_mail*
+_payments*
+_remote*
+_switch*
+.last-patch-url.txt

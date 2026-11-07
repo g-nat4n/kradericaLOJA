@@ -1,27 +1,38 @@
-# Vesta Moda Pre-Owned
+# Kra de Rica — WordPress / WooCommerce
 
-E-commerce full-stack em Next.js para uma loja de moda pre-owned. Cada peça pode ser única: ao ser vendida, deixa de ficar disponível.
+Loja WordPress com identidade **Kra de Rica** (tema + plugins).
 
 ## Stack
 
-Next.js · TypeScript · Tailwind CSS · MySQL · Prisma · Auth.js · Mercado Pago · Cloudinary
+WordPress · WooCommerce · PHP 8.2 · MySQL 8 · Docker · Mercado Pago
 
-## Desenvolvimento
+## Subir local
 
-1. Copie `.env.example` para `.env` e ajuste as chaves.
-2. Suba o MySQL: `docker compose up -d` (porta `3307` para não conflitar com um MySQL local)
-3. Instale as dependências: `npm install`
-4. Aplique o schema: `npx prisma db push`
-5. Popule dados de demonstração: `npm run db:seed`
-6. Rode o app: `npm run dev`
+1. Copie [`.env.example`](.env.example) para `.env` e defina `MYSQL_PASSWORD` e `MYSQL_ROOT_PASSWORD`.
+2. Suba os containers:
 
-`DATABASE_URL` local de exemplo:
+```powershell
+docker compose up -d mysql wordpress
+.\wordpress\bin\setup.ps1
+```
 
-`mysql://vesta:SENHA@localhost:3307/vesta`
+3. Abra http://localhost:8083  
+   - Admin WP: http://localhost:8083/wp-admin/?wp=1  
+   - **Atelier**: http://localhost:8083/admin/
 
-Conta administrativa do seed:
+Detalhes: [wordpress/README.md](wordpress/README.md).
 
-- e-mail: `admin@vestamoda.com`
-- senha: valor de `ADMIN_PASSWORD` no `.env`
+## Estrutura
 
-Sem credenciais do Mercado Pago o pedido é criado como pendente. Sem token do Melhor Envio, o checkout oferece retirada combinada — cotações de envio não são inventadas.
+```
+docker-compose.yml
+.env.example
+wordpress/
+  bin/                 # setup local, Mercado Pago, utilitários
+  docker/              # init SQL
+  wp-content/
+    themes/vesta/      # tema (fonte da verdade)
+    plugins/vesta-core/
+```
+
+Secrets locais (não versionar): `.env`, `.deploy-infinity.env`.

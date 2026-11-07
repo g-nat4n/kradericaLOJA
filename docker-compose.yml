@@ -1,7 +1,9 @@
+name: kra-de-rica
+
 services:
   mysql:
     image: mysql:8.4
-    container_name: vesta-mysql
+    container_name: kra-mysql
     restart: unless-stopped
     environment:
       MYSQL_USER: ${MYSQL_USER:-vesta}
@@ -9,12 +11,65 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-vesta}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD no .env}
     ports:
-      - "3307:3306"
+      - "3310:3306"
     volumes:
-      - vesta_mysql:/var/lib/mysql
+      - kra_mysql:/var/lib/mysql
+      - ./wordpress/docker/init-databases.sql:/docker-entrypoint-initdb.d/01-init-databases.sql:ro
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:php8.2-apache
+    container_name: kra-wordpress
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8083:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER:-vesta}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-vesta_wp}
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'http://localhost:8083');
+        define('WP_SITEURL', 'http://localhost:8083');
+        define('FS_METHOD', 'direct');
+        define('WP_MEMORY_LIMIT', '256M');
+    volumes:
+      - kra_wordpress_data:/var/www/html
+      - ./wordpress/wp-content/themes/vesta:/var/www/html/wp-content/themes/vesta
+      - ./wordpress/wp-content/plugins/vesta-core:/var/www/html/wp-content/plugins/vesta-core
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    container_name: kra-wpcli
+    depends_on:
+      - wordpress
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER:-vesta}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-vesta_wp}
+      WORDPRESS_TABLE_PREFIX: wp_
+      HOME: /tmp
+    volumes:
+      - kra_wordpress_data:/var/www/html
+      - ./wordpress/wp-content/themes/vesta:/var/www/html/wp-content/themes/vesta
+      - ./wordpress/wp-content/plugins/vesta-core:/var/www/html/wp-content/plugins/vesta-core
+      - ./wordpress/bin:/scripts
+    user: "33:33"
+    entrypoint: wp
+    command: "--info"
 
 volumes:
-  vesta_mysql:
+  kra_mysql:
+  kra_wordpress_data:

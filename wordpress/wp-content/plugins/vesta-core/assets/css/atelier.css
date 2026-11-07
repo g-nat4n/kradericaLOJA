@@ -1,0 +1,543 @@
+:root {
+  --atelier-burgundy: #400802;
+  --atelier-gold: #c4a35a;
+  --atelier-ivory: #f7f4ef;
+  --atelier-ink: #171611;
+  --atelier-taupe: #7a736c;
+  --atelier-line: #e4ddd3;
+  --atelier-cream: #efe9e0;
+  --atelier-wine: #8b1e1e;
+  --atelier-white: #fff;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--atelier-ivory);
+  color: var(--atelier-ink);
+  font-family: Arimo, system-ui, sans-serif;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+img { max-width: 100%; display: block; }
+
+.atelier { min-height: 100vh; }
+
+.atelier-aside {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  display: none;
+  width: 15rem;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  background: var(--atelier-burgundy);
+  color: var(--atelier-ivory);
+  border-right: 1px solid rgba(196, 163, 90, 0.25);
+}
+@media (min-width: 768px) {
+  .atelier-aside { display: flex; }
+}
+
+.atelier-brand {
+  padding: 0 1.5rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.16em;
+  color: var(--atelier-ivory);
+}
+.atelier-brand-sub {
+  margin: 0.25rem 0 0;
+  padding: 0 1.5rem;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--atelier-gold);
+}
+
+.atelier-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 2rem;
+  padding: 0 0.75rem;
+}
+.atelier-nav a {
+  padding: 0.7rem 0.75rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 239, 0.72);
+  border-left: 2px solid transparent;
+}
+.atelier-nav a:hover,
+.atelier-nav a.is-active {
+  color: var(--atelier-gold);
+  border-left-color: var(--atelier-gold);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.atelier-aside__foot {
+  margin-top: auto;
+  padding: 2rem 1.5rem 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.atelier-aside__store {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--atelier-gold);
+  padding: 0.75rem 1rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--atelier-gold);
+}
+.atelier-aside__store:hover {
+  background: var(--atelier-gold);
+  color: var(--atelier-burgundy);
+}
+.atelier-aside__logout {
+  background: none;
+  border: 0;
+  color: rgba(247, 244, 239, 0.7);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.atelier-aside__logout:hover { color: var(--atelier-gold); }
+
+.atelier-main { min-height: 100vh; }
+@media (min-width: 768px) {
+  .atelier-main { padding-left: 15rem; }
+}
+
+.atelier-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--atelier-burgundy);
+  color: var(--atelier-ivory);
+}
+@media (min-width: 768px) {
+  .atelier-mobile { display: none; }
+}
+.atelier-mobile__brand {
+  font-family: "Playfair Display", Georgia, serif;
+  letter-spacing: 0.16em;
+}
+.atelier-mobile__toggle {
+  border: 1px solid var(--atelier-gold);
+  background: transparent;
+  color: var(--atelier-gold);
+  padding: 0.45rem 0.7rem;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.atelier-mobile-nav {
+  display: none;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.75rem 1rem 1rem;
+  background: var(--atelier-burgundy);
+}
+.atelier-mobile-nav.is-open { display: flex; }
+.atelier-mobile-nav a {
+  padding: 0.65rem 0.5rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 239, 0.8);
+}
+
+.atelier-content { padding: 1.5rem; }
+@media (min-width: 768px) {
+  .atelier-content { padding: 2.5rem; }
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atelier-taupe);
+}
+.display {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--atelier-ink);
+}
+.atelier-lead {
+  margin: 0.5rem 0 0;
+  max-width: 36rem;
+  font-size: 0.925rem;
+  color: var(--atelier-taupe);
+}
+
+.atelier-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.atelier-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: var(--atelier-burgundy);
+  color: var(--atelier-ivory);
+  padding: 0.8rem 1.25rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.atelier-btn:hover { background: #2e0601; }
+.atelier-btn--ghost {
+  background: var(--atelier-white);
+  color: var(--atelier-ink);
+  border: 1px solid var(--atelier-line);
+}
+.atelier-btn--ghost:hover {
+  border-color: var(--atelier-gold);
+  color: var(--atelier-burgundy);
+}
+.atelier-btn--wine { background: var(--atelier-wine); }
+
+.atelier-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.atelier-chip {
+  border: 1px solid var(--atelier-line);
+  background: var(--atelier-white);
+  padding: 0.65rem 1rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.atelier-chip:hover {
+  border-color: var(--atelier-gold);
+  color: var(--atelier-burgundy);
+}
+
+.atelier-stats {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 768px) {
+  .atelier-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.atelier-stat {
+  border: 1px solid var(--atelier-line);
+  background: var(--atelier-white);
+  padding: 1.5rem;
+}
+.atelier-stat__label {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--atelier-taupe);
+}
+.atelier-stat__value {
+  margin: 0.75rem 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.85rem;
+}
+
+.atelier-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+@media (min-width: 640px) { .atelier-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .atelier-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .atelier-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.atelier-card {
+  border: 1px solid var(--atelier-line);
+  background: var(--atelier-white);
+  padding: 0.65rem;
+  box-shadow: 0 8px 24px rgba(23, 22, 17, 0.05);
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.atelier-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(196, 163, 90, 0.5);
+  box-shadow: 0 12px 28px rgba(64, 8, 2, 0.1);
+}
+.atelier-card__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--atelier-cream);
+}
+.atelier-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s;
+}
+.atelier-card:hover .atelier-card__media img { transform: scale(1.04); }
+.atelier-card__media img.is-sold { filter: grayscale(1); }
+.atelier-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: var(--atelier-gold);
+  color: var(--atelier-ink);
+  padding: 0.25rem 0.5rem;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.atelier-sold-bar {
+  position: absolute;
+  inset: auto 0 0;
+  background: rgba(23, 22, 17, 0.8);
+  color: #fff;
+  text-align: center;
+  padding: 0.4rem;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.atelier-card__meta {
+  margin: 0;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--atelier-taupe);
+}
+.atelier-card__title {
+  margin: 0.2rem 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+.atelier-card__price {
+  margin: 0.35rem 0 0;
+  color: var(--atelier-gold);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.atelier-card__status {
+  display: inline-block;
+  margin-top: 0.4rem;
+  border: 1px solid var(--atelier-line);
+  padding: 0.15rem 0.4rem;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.atelier-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+.atelier-mini {
+  border: 1px solid var(--atelier-line);
+  background: var(--atelier-ivory);
+  color: var(--atelier-ink);
+  padding: 0.35rem 0.5rem;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.atelier-mini:hover { border-color: var(--atelier-gold); }
+.atelier-mini--danger { color: var(--atelier-wine); }
+
+.atelier-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-top: 2rem;
+}
+.atelier-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atelier-taupe);
+}
+.atelier-field input,
+.atelier-field select,
+.atelier-field textarea {
+  width: 100%;
+  margin-top: 0.45rem;
+  border: 1px solid var(--atelier-line);
+  background: var(--atelier-white);
+  padding: 0.75rem 0.85rem;
+  color: var(--atelier-ink);
+}
+.atelier-field textarea { min-height: 7rem; resize: vertical; }
+.atelier-row {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .atelier-row--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .atelier-row--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .atelier-row--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+.atelier-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.925rem;
+}
+.atelier-check input { margin-top: 0.2rem; }
+.atelier-hint { margin: 0; font-size: 0.8rem; color: var(--atelier-taupe); }
+
+.atelier-alert {
+  margin-top: 1.5rem;
+  border: 1px solid rgba(139, 30, 30, 0.3);
+  background: rgba(139, 30, 30, 0.08);
+  color: var(--atelier-wine);
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+}
+.atelier-muted { color: var(--atelier-taupe); font-size: 0.9rem; }
+
+.atelier-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.atelier-list-item {
+  border: 1px solid var(--atelier-line);
+  background: var(--atelier-white);
+  padding: 1.25rem;
+}
+.atelier-list-item h2 {
+  margin: 0.25rem 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+}
+.atelier-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.atelier-gallery img {
+  width: 5.5rem;
+  height: 7rem;
+  object-fit: cover;
+  border: 1px solid var(--atelier-line);
+}
+
+.atelier-section { margin-top: 2.5rem; }
+.atelier-section h2 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.6rem;
+}
+
+.atelier-back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--atelier-taupe);
+}
+.atelier-back:hover { color: var(--atelier-burgundy); }
+
+.atelier-order-items {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.atelier-order-items__row {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+.atelier-order-items__thumb {
+  width: 3.5rem;
+  height: 4.5rem;
+  overflow: hidden;
+  border: 1px solid var(--atelier-line);
+  background: #f3efe8;
+}
+.atelier-order-items__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.atelier-order-items__ph,
+.atelier-order-list__ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--atelier-taupe);
+  font-size: 1.25rem;
+}
+.atelier-order-items__meta {
+  display: grid;
+  gap: 0.2rem;
+}
+.atelier-order-items__meta strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+}
+.atelier-order-items__price {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.atelier-order-list__thumbs {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+.atelier-order-list__img,
+.atelier-order-list__ph {
+  width: 2.75rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border: 1px solid var(--atelier-line);
+  background: #f3efe8;
+  display: block;
+}
